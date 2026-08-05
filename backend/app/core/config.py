@@ -1,7 +1,8 @@
 import os
+import json
 from typing import List
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field
+from pydantic import Field, field_validator
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "CryptoSphere API"
@@ -27,6 +28,21 @@ class Settings(BaseSettings):
     
     # Initial whitelisted emails for the 4 users
     WHITELISTED_EMAILS: List[str] = Field(default_factory=list)
+
+    @field_validator("CORS_ORIGINS", "WHITELISTED_EMAILS", mode="before")
+    @classmethod
+    def parse_list(cls, v):
+        if isinstance(v, str):
+            v = v.strip()
+            if not v:
+                return []
+            if v.startswith("[") and v.endswith("]"):
+                try:
+                    return json.loads(v)
+                except Exception:
+                    pass
+            return [x.strip() for x in v.split(",") if x.strip()]
+        return v
 
     model_config = SettingsConfigDict(
         env_file=".env",
