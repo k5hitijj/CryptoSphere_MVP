@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(59, 102, 255, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-dark-card/60 backdrop-blur-md border border-dark-border rounded-2xl shadow-glass transition-all duration-300;
+  }
+  
+  .glass-panel-hover {
+    @apply hover:border-brand-500/40 hover:shadow-glass-hover;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2.5 bg-brand-500 hover:bg-brand-600 active:scale-95 text-white font-medium rounded-xl transition-all duration-200 shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2.5 bg-dark-border/80 hover:bg-dark-border text-slate-200 font-medium rounded-xl transition-all duration-200 border border-slate-700/50 flex items-center justify-center gap-2;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2.5 bg-crypto-red hover:bg-red-600 active:scale-95 text-white font-medium rounded-xl transition-all duration-200 shadow-lg shadow-red-500/20 flex items-center justify-center gap-2;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-dark-bg/80 border border-dark-border focus:border-brand-500 text-slate-100 placeholder:text-slate-500 rounded-xl outline-none transition-all duration-200;
+  }
+
+  /* Custom high-end scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0B0F19;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #243249;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3b66ff;
+  }
+}
+
+/* Micro-animations */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

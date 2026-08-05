@@ -1,0 +1,35 @@
+# Root gitignore to protect secrets and ignore build/temporary files
+
+# Secrets & Environment Configuration
+.env
+*.env
+backend/.env
+frontend/.env
+
+# Temporary IDE / Agent Directories
+brain/
+.gemini/
+*.log
+
+# Python dependency & caching directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Node / JS dependency & build directories
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+dist-ssr/
+.eslintcache
+.vite
+
+# OS specific files
+.DS_Store
+Thumbs.db
