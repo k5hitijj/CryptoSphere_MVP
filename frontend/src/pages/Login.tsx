@@ -23,8 +23,11 @@ export const Login: React.FC = () => {
     const fetchConfig = async () => {
       try {
         const response = await apiClient.get<{ google_client_id: string }>('/auth/config');
+        console.log("Backend auth config response:", response.data);
         if (response.data.google_client_id) {
           setGoogleClientId(response.data.google_client_id);
+        } else {
+          console.warn("Backend returned an empty Google Client ID. Check your backend env variables.");
         }
       } catch (err) {
         console.error("Failed to load auth config from backend:", err);
@@ -34,6 +37,7 @@ export const Login: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log("Checking Google Sign-In state. Client ID:", googleClientId, "window.google:", !!window.google);
     if (!googleClientId) return;
 
     // Define the global callback for Google OAuth response
@@ -55,6 +59,7 @@ export const Login: React.FC = () => {
     // Initialize Google Sign-In with safe script load check polling
     const renderGoogleButton = () => {
       if (window.google && window.google.accounts) {
+        console.log("Google accounts library loaded. Initializing button...");
         window.google.accounts.id.initialize({
           client_id: googleClientId,
           callback: window.handleCredentialResponse,
