@@ -124,7 +124,7 @@ export const Login: React.FC = () => {
         {/* Auth Panel Box */}
         <div className="glass-panel p-8 relative overflow-hidden border-slate-800/80">
           <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-500 to-transparent"></div>
-          
+
           <h3 className="text-xl font-semibold text-slate-100 mb-6 text-center">
             Authorized Account Login
           </h3>
@@ -139,7 +139,7 @@ export const Login: React.FC = () => {
           {/* Social Sign-In Button Container */}
           <div className="flex flex-col items-center justify-center space-y-4">
             <div id="google-signin-btn" className="w-full flex justify-center"></div>
-            
+
             {isLoading && (
               <div className="flex items-center gap-2 text-slate-400 text-xs py-2">
                 <div className="w-4 h-4 border-2 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div>
@@ -177,13 +177,13 @@ export const Login: React.FC = () => {
                 Local Testing
               </span>
             </div>
-            
+
             <p className="text-[11px] text-slate-400 mb-4 leading-relaxed">
               Use these whitelisted accounts to skip the Google login requirement for demo verification:
             </p>
 
             <div className="grid grid-cols-2 gap-2">
-              {['kshitij.varma5@gmail.com', 'mitvdummy@gmail.com', 'user3@example.com', 'user4@example.com'].map((email, idx) => (
+              {['user1@example.com', 'user2@example.com', 'user3@example.com', 'user4@example.com'].map((email, idx) => (
                 <button
                   key={email}
                   type="button"
