@@ -52,17 +52,30 @@ export const Login: React.FC = () => {
       }
     };
 
-    // Initialize Google Sign-In if library is loaded
-    if (window.google) {
-      window.google.accounts.id.initialize({
-        client_id: googleClientId,
-        callback: window.handleCredentialResponse,
-      });
+    // Initialize Google Sign-In with safe script load check polling
+    const renderGoogleButton = () => {
+      if (window.google && window.google.accounts) {
+        window.google.accounts.id.initialize({
+          client_id: googleClientId,
+          callback: window.handleCredentialResponse,
+        });
 
-      window.google.accounts.id.renderButton(
-        document.getElementById('google-signin-btn'),
-        { theme: 'dark', size: 'large', width: '320' }
-      );
+        window.google.accounts.id.renderButton(
+          document.getElementById('google-signin-btn'),
+          { theme: 'dark', size: 'large', width: '320' }
+        );
+        return true;
+      }
+      return false;
+    };
+
+    if (!renderGoogleButton()) {
+      const interval = setInterval(() => {
+        if (renderGoogleButton()) {
+          clearInterval(interval);
+        }
+      }, 250);
+      return () => clearInterval(interval);
     }
   }, [googleClientId, loginWithGoogle]);
 
@@ -165,9 +178,10 @@ export const Login: React.FC = () => {
             </p>
 
             <div className="grid grid-cols-2 gap-2">
-              {['user1@example.com', 'user2@example.com', 'user3@example.com', 'user4@example.com'].map((email, idx) => (
+              {['kshitij.varma5@gmail.com', 'mitvdummy@gmail.com', 'user3@example.com', 'user4@example.com'].map((email, idx) => (
                 <button
                   key={email}
+                  type="button"
                   onClick={() => handleMockLogin(email)}
                   disabled={isLoading}
                   className="px-3 py-2 bg-dark-card hover:bg-brand-500/10 border border-dark-border hover:border-brand-500/30 rounded-lg text-[11px] text-slate-300 hover:text-brand-400 transition-all duration-150 flex items-center justify-between text-left"
@@ -183,4 +197,5 @@ export const Login: React.FC = () => {
     </div>
   );
 };
+
 export default Login;
