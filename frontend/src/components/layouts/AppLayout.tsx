@@ -3,11 +3,12 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from './Sidebar';
 import { apiClient } from '../../services/api';
-import { Bell, AlertCircle } from 'lucide-react';
+import { Bell, Menu, Sparkles } from 'lucide-react';
 
 export const AppLayout: React.FC = () => {
   const { isAuthenticated, loading } = useAuth();
   const [toasts, setToasts] = useState<any[]>([]);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -58,20 +59,38 @@ export const AppLayout: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-dark-bg flex relative">
-      {/* Navigation Sidebar */}
-      <Sidebar />
+    <div className="min-h-screen bg-dark-bg flex flex-col lg:flex-row relative">
+      
+      {/* Mobile Top Navigation Header */}
+      <header className="lg:hidden h-16 bg-dark-card/60 backdrop-blur-xl border-b border-dark-border flex items-center justify-between px-6 fixed top-0 left-0 right-0 z-20">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-brand-500/20">
+            <Sparkles className="w-4 h-4 text-white" />
+          </div>
+          <span className="font-bold text-sm tracking-tight text-white">CryptoSphere</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => setMobileOpen(true)}
+          className="p-2 hover:bg-dark-border/40 rounded-lg text-slate-300 hover:text-white transition-all"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      </header>
+
+      {/* Navigation Sidebar (Desktop + Mobile Drawer) */}
+      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
       {/* Main Content Area */}
-      <main className="flex-1 pl-64 min-h-screen flex flex-col overflow-x-hidden">
+      <main className="flex-1 lg:pl-64 pt-20 lg:pt-0 min-h-screen flex flex-col overflow-x-hidden">
         {/* Dynamic Inner Views */}
-        <div className="flex-1 p-8 max-w-7xl w-full mx-auto">
+        <div className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           <Outlet />
         </div>
       </main>
 
       {/* Floating Notifications Toast Portal overlay */}
-      <div className="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none w-80">
+      <div className="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none w-80 max-w-[calc(100vw-3rem)]">
         {toasts.map((toast) => (
           <div
             key={toast.toastId}
