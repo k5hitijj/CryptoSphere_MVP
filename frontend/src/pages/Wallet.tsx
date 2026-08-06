@@ -223,11 +223,9 @@ export const Wallet: React.FC = () => {
 
   const popularBanks = [
     { name: 'HSBC' },
-    { name: 'Barclays' },
-    { name: 'Revolut' },
-    { name: 'Citibank' },
-    { name: 'JPMorgan Chase' },
-    { name: 'DBS Bank' }
+    { name: 'AXIS BANK' },
+    { name: 'IDFC BANK' },
+    { name: 'HDFC BANK' }
   ];
 
   return (
