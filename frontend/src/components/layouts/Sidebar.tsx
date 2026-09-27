@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  TrendingUp, 
-  Briefcase, 
-  Wallet, 
-  Settings, 
+import {
+  LayoutDashboard,
+  TrendingUp,
+  Briefcase,
+  Wallet,
+  Settings,
   LogOut,
   Sparkles,
   LineChart,
@@ -45,12 +45,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen = false, setMobileO
               CryptoSphere
             </h1>
             <span className="text-[10px] text-emerald-400 font-medium bg-emerald-400/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
-              Private MVP
+              Private Platform
             </span>
           </div>
         </div>
         {setMobileOpen && (
-          <button 
+          <button
             type="button"
             onClick={() => setMobileOpen(false)}
             className="lg:hidden p-1.5 hover:bg-dark-border/40 rounded-lg text-slate-400 hover:text-white transition-all"
@@ -70,10 +70,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen = false, setMobileO
               to={item.to}
               onClick={() => setMobileOpen && setMobileOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3.5 px-4 py-3.5 rounded-xl font-medium text-sm transition-all duration-200 ${
-                  isActive
-                    ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/25'
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-dark-border/40'
+                `flex items-center gap-3.5 px-4 py-3.5 rounded-xl font-medium text-sm transition-all duration-200 ${isActive
+                  ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/25'
+                  : 'text-slate-400 hover:text-slate-100 hover:bg-dark-border/40'
                 }`
               }
             >
@@ -88,9 +87,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen = false, setMobileO
       <div className="p-4 border-t border-dark-border bg-dark-bg/20 flex-shrink-0">
         <div className="flex items-center gap-3 mb-4 px-2">
           {user?.avatar ? (
-            <img 
-              src={user.avatar} 
-              alt={user.name} 
+            <img
+              src={user.avatar}
+              alt={user.name}
               className="w-10 h-10 rounded-full border-2 border-dark-border"
               referrerPolicy="no-referrer"
             />
@@ -104,7 +103,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen = false, setMobileO
             <p className="text-[11px] text-slate-500 truncate">{user?.email}</p>
           </div>
         </div>
-        
+
         <button
           type="button"
           onClick={logout}
